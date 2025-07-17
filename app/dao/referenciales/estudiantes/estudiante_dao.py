@@ -36,7 +36,24 @@ class EstudianteDao:
             con.close()
     
     def alta(self, estudiante: EstudianteDto) -> bool:
-        pass
+        insertsql = """
+        INSERT INTO public.estudiantes(nombres, apellidos, ci, sexo, id_curso)
+	    VALUES (%s, %s, %s, %s, %s);
+        """
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+        
+        try:
+            cur.execute(insertsql, (estudiante.nombres, estudiante.apellidos, estudiante.ci, estudiante.sexo, estudiante.id_curso,))
+            con.commit()
+            return True
+        except con.Error as e:
+            app.logger.error(e)
+        finally:
+            cur.close()
+            con.close()
+        return False
     
     def baja(self, id) -> bool:
         pass

@@ -8,7 +8,7 @@ Estudiantes
 <div class="container-fluid">
     <div class="container-flat-form">
         <div class="title-flat-form title-flat-blue">Registrar un nuevo estudiante</div>
-        <form class="form-padding">
+        <form class="form-padding" action="{{ url_for('estu_route.estudiante_guardar') }}" method="post">
             <div class="row">
                 <div class="col-xs-12">
                     <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>

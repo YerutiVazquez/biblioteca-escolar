@@ -1,15 +1,33 @@
-from flask import Blueprint, render_template
-from app.dao.referenciales.estudiantes.estudiante_dao import EstudianteDao
+from flask import Blueprint, render_template, redirect, url_for, request
+from app.dao.referenciales.estudiantes.estudiante_dao import EstudianteDao, EstudianteDto
+from app.dao.referenciales.cursos.curso_dto import CursoDto
 from app.dao.referenciales.cursos.curso_dao import CursoDao
 
 estu_route = Blueprint('estu_route', __name__, template_folder='templates')
+estu = EstudianteDao()
+curso = CursoDao()
 
 @estu_route.route('/')
 def index():
-    estu = EstudianteDao()
     return render_template('estu-index.html', estu=estu.leer())
 
 @estu_route.route('/estudiante-form')
 def estudiante_form():
-    curso = CursoDao()
     return render_template('estu-form.html', combocursos=curso.leer())
+
+@estu_route.route('/estudiante-form', methods=['POST'])
+def estudiante_guardar():
+    
+    cedula = request.form['estu_ci']
+    nombres = request.form['estu_nombres']
+    apellidos = request.form['estu_apellidos']
+    curso = CursoDto(int(request.form['estu_curso']), request.form['estu_curso']) 
+    sexo = request.form['estu_sexo']
+    estudiante = EstudianteDto(id=None, nombres=nombres, apellidos=apellidos, ci=cedula, sexo=sexo, curso=curso)
+    
+    res = estu.alta(estudiante)
+    
+    if res:
+        return redirect(url_for('estu_route.index'))
+    else:
+        return redirect(url_for('estu_route.estudiante_form'))
