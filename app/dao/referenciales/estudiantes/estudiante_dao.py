@@ -5,7 +5,14 @@ from app.dao.referenciales.estudiantes.estudiante_dto import EstudianteDto
 class EstudianteDao:
     
     def leer(self):
-        sql = "SELECT id, nombres, apellidos, ci FROM estudiantes;"
+        sql = """
+        SELECT 
+            e.id, e.nombres, e.apellidos, e.ci, e.sexo, c.descripcion 
+        FROM 
+            estudiantes as e
+        INNER JOIN 
+            cursos as c on e.id_curso = c.id
+        """
         conexion = Conexion()
         con = conexion.getConexion()
         cur = con.cursor()
@@ -18,6 +25,8 @@ class EstudianteDao:
                     , "nombres": estudiante[1]
                     , "apellidos": estudiante[2]
                     , "ci": estudiante[3]
+                    , "sexo": estudiante[4]
+                    , "curso_descripcion": estudiante[5]
                 } for estudiante in lista ] if len(lista) != 0 else []
             
         except con.Error as e:

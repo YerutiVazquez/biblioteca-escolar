@@ -7,3 +7,7 @@ estu_route = Blueprint('estu_route', __name__, template_folder='templates')
 def index():
     estu = EstudianteDao()
     return render_template('estu-index.html', estu=estu.leer())
+
+@estu_route.route('/estudiante-form')
+def estudiante_form():
+    return render_template('estu-form.html')
