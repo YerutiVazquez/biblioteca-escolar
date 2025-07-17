@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from app.dao.referenciales.estudiantes.estudiante_dao import EstudianteDao
+from app.dao.referenciales.cursos.curso_dao import CursoDao
 
 estu_route = Blueprint('estu_route', __name__, template_folder='templates')
 
@@ -10,4 +11,5 @@ def index():
 
 @estu_route.route('/estudiante-form')
 def estudiante_form():
-    return render_template('estu-form.html')
+    curso = CursoDao()
+    return render_template('estu-form.html', combocursos=curso.leer())

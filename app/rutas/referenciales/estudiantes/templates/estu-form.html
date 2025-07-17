@@ -15,17 +15,17 @@ Estudiantes
                 </div>
                 <div class="col-xs-12">
                     <div class="group-material">
-                        <input type="text" class="material-control tooltips-general"
-                            placeholder="Escribe aquí el NIE del alumno" required="" maxlength="20"
-                            data-toggle="tooltip" data-placement="top" title="NIE de estudiante">
+                        <input type="text" class="material-control tooltips-general" name="estu_ci"
+                            placeholder="Escribe aquí el numero de CI del alumno" required="" maxlength="20"
+                            data-toggle="tooltip" data-placement="top" title="CI de estudiante">
                         <span class="highlight"></span>
                         <span class="bar"></span>
-                        <label>NIE</label>
+                        <label>CI</label>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="group-material">
-                        <input type="text" class="material-control tooltips-general"
+                        <input type="text" class="material-control tooltips-general" name="estu_nombres"
                             placeholder="Escribe aquí los nombres del alumno" required=""
                             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
                             data-placement="top" title="Nombres del estudiante">
@@ -36,7 +36,7 @@ Estudiantes
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <div class="group-material">
-                        <input type="text" class="material-control tooltips-general"
+                        <input type="text" class="material-control tooltips-general" name="estu_apellidos"
                             placeholder="Escribe aquí los apellidos del alumno" required=""
                             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
                             data-placement="top" title="Apellidos del estudiante">
@@ -47,13 +47,15 @@ Estudiantes
                 </div>
                 <div class="col-xs-12">
                     <div class="group-material">
-                        <span>Sección</span>
-                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top"
-                            title="Elige la sección a la que pertenece el alumno">
-                            <option value="" disabled="" selected="">Selecciona una sección</option>
-                            <option value="seccion">Sección</option>
-                            <option value="seccion">Sección</option>
-                            <option value="seccion">Sección</option>
+                        <span>Curso</span>
+                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top" name="estu_curso"
+                            title="Elige el curso que pertenece el alumno">
+                            <option value="" disabled="" selected="">Selecciona un curso</option>
+                            {% for item in combocursos %}
+                            <option value="{{ item['id'] }}">{{ item['descripcion'] }}</option>
+                            {% else %}
+                            <option value="" disabled="" selected="">No hay registros</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
