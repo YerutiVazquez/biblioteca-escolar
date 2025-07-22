@@ -1,6 +1,7 @@
 from flask import Flask
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q9z\n\xec]/'
 
 from app.rutas.referenciales.ciudad.ciudad_routes import ciudad_route
 from app.rutas.referenciales.institucion.institucion_routes import insti_route

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'render_elements.html' import pintar_alerta %}
 
 {% block titulo %}
 Docentes
@@ -46,4 +47,5 @@ Docentes
                 </div>
             </div>
         </div>
+        {{ pintar_alerta(messages) }}
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 from app.dao.referenciales.docentes.docente_dao import DocenteDto, DocenteDao # importar el modelo y dao para bd
 
 docente_route = Blueprint('docente_route', __name__, template_folder='templates')
@@ -37,6 +37,8 @@ def docente_guardar():
         # url for construye la url
         # se comen asi bien sabroso
         # render template no entra aca
+        flash("Proceso exitoso", 'success')
         return redirect(url_for('docente_route.index'))
     else:
+        flash("Ocurrio un error al procesar", 'danger')
         return redirect(url_for('docente_route.docente_form'))
