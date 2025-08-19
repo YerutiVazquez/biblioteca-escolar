@@ -11,6 +11,7 @@ from app.rutas.referenciales.docentes.docente_route import docente_route
 from app.rutas.referenciales.perso_adm.persoadm_route import persoadm_route
 from app.rutas.referenciales.editoriales.editorial_route import editorial_route
 
+
 app.register_blueprint(inicio_route)
 
 modulo0 = "/referenciales"
