@@ -34,6 +34,39 @@ class EstudianteDao:
         finally:
             cur.close()
             con.close()
+            
+    def leerPorId(self, id):
+        sql = """
+        SELECT 
+            e.id, e.nombres, e.apellidos, e.ci, e.sexo, c.descripcion, e.id_curso
+        FROM 
+            estudiantes as e
+        INNER JOIN 
+            cursos as c on e.id_curso = c.id
+        WHERE e.id = %s
+        """
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+        
+        try:
+            cur.execute(sql, (id,))
+            estudiante = cur.fetchone()
+            return {
+                    "id": estudiante[0]
+                    , "nombres": estudiante[1]
+                    , "apellidos": estudiante[2]
+                    , "ci": estudiante[3]
+                    , "sexo": estudiante[4]
+                    , "curso_descripcion": estudiante[5]
+                    , "id_curso": estudiante[6]
+                }
+            
+        except con.Error as e:
+            app.logger.error(e)
+        finally:
+            cur.close()
+            con.close()
     
     def alta(self, estudiante: EstudianteDto) -> bool:
         insertsql = """

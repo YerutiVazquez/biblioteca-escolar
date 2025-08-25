@@ -31,3 +31,7 @@ def estudiante_guardar():
         return redirect(url_for('estu_route.index'))
     else:
         return redirect(url_for('estu_route.estudiante_form'))
+    
+@estu_route.route('/estudiante-form-editar/<int:id>')
+def estudiante_form_editar(id):
+    return render_template('estu-form-editar.html', combocursos=curso.leer(), estudiante=estu.leerPorId(id))

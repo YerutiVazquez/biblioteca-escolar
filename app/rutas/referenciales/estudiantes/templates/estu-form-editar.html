@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Estudiantes
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Editar estudiante</div>
+        <form class="form-padding" action="{{ url_for('estu_route.estudiante_guardar') }}" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>
+                </div>
+                <div class="col-xs-12">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="estu_ci"
+                            placeholder="Escribe aquí el numero de CI del alumno" required="" maxlength="20"
+                            data-toggle="tooltip" data-placement="top" title="CI de estudiante" value="{{ estudiante['ci'] }}">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>CI</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="estu_nombres"
+                            placeholder="Escribe aquí los nombres del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Nombres del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Nombres</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="estu_apellidos"
+                            placeholder="Escribe aquí los apellidos del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Apellidos del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Apellidos</label>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="group-material">
+                        <span>Curso</span>
+                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top" name="estu_curso"
+                            title="Elige el curso que pertenece el alumno">
+                            <option value="" disabled="" selected="">Selecciona un curso</option>
+                            {% for item in combocursos %}
+                            
+                            {% if estudiante['id_curso'] == item['id'] %}
+                            <option value="{{ item['id'] }}" selected>{{ item['descripcion'] }}</option>
+                            {%else%}
+                            <option value="{{ item['id'] }}">{{ item['descripcion'] }}</option>
+                            {% endif %}
+                            {% else %}
+                            <option value="" disabled="" selected="">No hay registros</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="group-material">
+                        <span>Sexo</span>
+                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top" name="estu_sexo"
+                            title="Elige el sexo que pertenece el alumno">
+                            <option>Selecciona un sexo</option>
+                            <option value="femenino" selected="">Femenino</option>
+                            <option value="masculino" selected="">Masculino</option>
+                            <option value="otros" selected="">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-xs-12">
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i
+                                class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                            Guardar</button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
