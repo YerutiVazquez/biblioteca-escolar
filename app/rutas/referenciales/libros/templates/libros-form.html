@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% from 'render_elements.html' import pintar_alerta %}
+
+{% block titulo %}
+Libros
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Registrar un nuevo Libro</div>
+        <form class="form-padding" action="{{ url_for('libros_route.libros_guardar') }}" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>
+                </div>
+                <div class="col-xs-12">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="Titulo"
+                            placeholder="Escribe aquí el título del libro" required="" maxlength="100"
+                            data-toggle="tooltip" data-placement="top" title="Título del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Título</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="Autores"
+                            placeholder="Escribe aquí los nombres de los autores" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Nombres de autores">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Autores</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="ISBN"
+                            placeholder="Ecribe el ISBN del libro, sin ningun separador" required=""
+                            pattern="[0-9]{1,20}" maxlength="20" data-toggle="tooltip"
+                            data-placement="top" title="ISBN del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>ISBN</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="año_publicacion"
+                            placeholder="Escribe aquí el año de publicacion" required=""
+                            pattern="[0-9]{4}" maxlength="4" data-toggle="tooltip"
+                            data-placement="top" title="Año de publicacion">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Año de publicacion</label>
+                    </div>
+                </div>
+                 <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="genero"
+                            placeholder="Escribe aquí el género del libro" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Género del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Género del libro</label>
+                    </div>
+                </div>
+                 <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="cantidad_disponible"
+                            placeholder="Escribe aquí la cantidad disponible" required=""
+                            pattern="[0-9]{1,5}" maxlength="5" data-toggle="tooltip"
+                            data-placement="top" title="Cantidad disponible">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Cantidad disponible</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="ubicacion"
+                            placeholder="Escribe aquí la ubicación del libro" required=""
+                            pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,100}" maxlength="100" data-toggle="tooltip"
+                            data-placement="top" title="Ubicación del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Ubicación del libro</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="editorial"
+                            placeholder="Escribe aquí la editorial del libro" required=""
+                            pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,100}" maxlength="100" data-toggle="tooltip"
+                            data-placement="top" title="Editorial del libro">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Editorial del libro</label>
+                    </div>
+                </div>
+                
+                
+                <div class="col-xs-12">
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i
+                                class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                            Guardar</button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{ pintar_alerta(messages) }}
+</div>
+{% endblock %}

@@ -11,7 +11,6 @@ from app.rutas.referenciales.docentes.docente_route import docente_route
 from app.rutas.referenciales.perso_adm.persoadm_route import persoadm_route
 from app.rutas.referenciales.editoriales.editorial_route import editorial_route
 
-
 app.register_blueprint(inicio_route)
 
 modulo0 = "/referenciales"
@@ -21,4 +20,3 @@ app.register_blueprint(estu_route, url_prefix=f'{modulo0}/estudiante')
 app.register_blueprint(docente_route, url_prefix=f'{modulo0}/docente')
 app.register_blueprint(persoadm_route, url_prefix=f'{modulo0}/persoadm')
 app.register_blueprint(editorial_route, url_prefix=f'{modulo0}/editoriales')
-                       

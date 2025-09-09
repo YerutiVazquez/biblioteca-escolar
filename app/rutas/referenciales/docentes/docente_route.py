@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from app.dao.referenciales.docentes.docente_dao import DocenteDto, DocenteDao # importar el modelo y dao para bd
+from ....dao.referenciales.docentes.docente_dao import DocenteDao
+from ....dao.referenciales.docentes.docente_dto import DocenteDto
 
 docente_route = Blueprint('docente_route', __name__, template_folder='templates')
 docente_dao = DocenteDao() # instancia del dao
