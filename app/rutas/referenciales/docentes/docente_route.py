@@ -21,12 +21,11 @@ def docente_guardar():
     
     nombre = request.form['docente_nombre']
     apellido = request.form['docente_apellido']
-    titulo= request.form['docente_titulo']
-    cedula = request.form['docente_ci']  
-    estado = request.form['docente_estado']
+    ci= request.form['docente_ci']
+    materia = request.form['docente_materia']  
     
     # hacemos un objetito churro para el dao
-    docente = DocenteDto(id=None, nombre=nombre, apellido=apellido, titulo=titulo, ci=cedula, estado=estado,)
+    docente = DocenteDto(id=None, nombre=nombre, apellido=apellido, ci=ci, materia=materia,)
     
     # el dao
     res = docente_dao.alta(docente)

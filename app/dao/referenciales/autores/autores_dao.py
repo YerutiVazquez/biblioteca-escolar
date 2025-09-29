@@ -1,15 +1,15 @@
 from flask import current_app as app
 from app.conexion.conexion import Conexion
-from app.dao.referenciales.editoriales.edioriales_dto import EditorialDto
+from app.dao.referenciales.autores.autores_dto import AutoresDto
 
-class EditorialDao:
+class AutoresDao:
     
     def leer(self):
         sql = """
         SELECT 
-            id_editoriales, nombre_editorial, pais
+            id_autor, nombre_autor
         FROM 
-            editoriales
+            autores
         """
         conexion = Conexion()
         con = conexion.getConexion()
@@ -19,10 +19,9 @@ class EditorialDao:
             cur.execute(sql)
             lista = cur.fetchall()
             return [{
-                    "id": editorial[0]
-                    , "nombre_editorail": editorial[1]
-                    , "pais": editorial[2]
-                } for editorial in lista ] if len(lista) != 0 else []
+                    "id_autor": autores[0]
+                    , "nombre_autor": autores[1]
+                } for autores in lista ] if len(lista) != 0 else []
             
         except con.Error as e:
             app.logger.error(e)
@@ -30,17 +29,17 @@ class EditorialDao:
             cur.close()
             con.close()
     
-    def alta(self, editorial: EditorialDto) -> bool:
+    def alta(self, autores: AutoresDto) -> bool:
         insertsql = """
-        INSERT INTO public.editoriales(nombre_editorial, pais)
-	    VALUES (%s, %s);
+        INSERT INTO public.autores(nombre_autor)
+	    VALUES (%s);
         """
         conexion = Conexion()
         con = conexion.getConexion()
         cur = con.cursor()
         
         try:
-            cur.execute(insertsql, (editorial.nombres_editorial, editorial.pais,))
+            cur.execute(insertsql, (autores.nombre_autor,))
             con.commit()
             return True
         except con.Error as e:
@@ -53,5 +52,5 @@ class EditorialDao:
     def baja(self, id) -> bool:
         pass
     
-    def modificacion(self, editorial: EditorialDto) -> bool:
+    def modificacion(self, autores: AutoresDto) -> bool:
         pass

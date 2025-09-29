@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+Autores
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Registrar un nuevo Autor</div>
+        <form class="form-padding" action="{{ url_for('autores_route.autores_alta') }}" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos </legend><br>
+                </div>
+                <div class="col-xs-12">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="nombre_autor"
+                            placeholder="Escribe aquí el Nombre del autor" required="" maxlength="20"
+                            data-toggle="tooltip" data-placement="top" title="Nombre del autor">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Autor</label>
+                    </div>
+                               
+                
+                <div class="col-xs-12">
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i
+                                class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                            Guardar</button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

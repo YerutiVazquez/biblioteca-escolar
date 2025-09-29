@@ -7,7 +7,7 @@ class DocenteDao:
     def leer(self):
         sql = """
         SELECT 
-            id, nombre, apellido, ci, titulo, estado 
+            id_docentes, nombre, apellido, ci, materia 
         FROM 
             docentes 
         """
@@ -19,12 +19,11 @@ class DocenteDao:
             cur.execute(sql)
             lista = cur.fetchall()
             return [{
-                    "id": docente[0]
+                    "id_docentes": docente[0]
                     , "nombre": docente[1]
                     , "apellido": docente[2]
-                    , "titulo": docente[3]
-                    , "estado": docente[4]
-                    , "ci": docente[5]
+                    , "ci": docente[3]
+                    , "materia": docente[4]
                 } for docente in lista ] if len(lista) != 0 else []
             
         except con.Error as e:
@@ -35,15 +34,15 @@ class DocenteDao:
     
     def alta(self, docente: DocenteDto) -> bool:
         insertsql = """
-        INSERT INTO public.docentes(nombre, apellido, titulo, estado, ci)
-	    VALUES (%s, %s, %s, %s, %s);
+        INSERT INTO public.docentes(nombre, apellido, ci, materia)
+	    VALUES (%s, %s, %s, %s);
         """
         conexion = Conexion()
         con = conexion.getConexion()
         cur = con.cursor()
         
         try:
-            cur.execute(insertsql, (docente.nombre, docente.apellido, docente.titulo, docente.estado, docente.ci,))
+            cur.execute(insertsql, (docente.nombre, docente.apellido, docente.ci, docente.materia,))
             con.commit()
             return True
         except con.Error as e:

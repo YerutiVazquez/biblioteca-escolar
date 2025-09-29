@@ -5,7 +5,7 @@ class Conexion:
     """Metodo constructor
     """
     def __init__(self):
-        self.con = psycopg2.connect("dbname=biblioteca_db user=postgres host=127.0.0.1 password=1")
+        self.con = psycopg2.connect("dbname=bd_biblioteca user=postgres host=127.0.0.1 password=1")
 
     """getConexion
 
