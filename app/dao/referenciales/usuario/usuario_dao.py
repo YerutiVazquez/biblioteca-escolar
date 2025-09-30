@@ -1,15 +1,15 @@
 from flask import current_app as app
 from app.conexion.conexion import Conexion
-from app.dao.referenciales.perso_adm.persoadm_dto import PersoadmDto
+from app.dao.referenciales.usuario.usuario_dto import UsuarioDto
 
-class PersoadmDao:
+class UsuarioDao:
     
     def leer(self):
         sql = """
         SELECT 
-            id, nombre, apellidos, ci, estado 
+            id_usuario, nombre, apellido, cedula, cargo, usuario, passw 
         FROM 
-            perso_adm 
+            usuario 
         """
         conexion = Conexion()
         con = conexion.getConexion()
@@ -19,13 +19,15 @@ class PersoadmDao:
             cur.execute(sql)
             lista = cur.fetchall()
             return [{
-                    "id": persoadm[0]
-                    , "nombre": persoadm[1]
-                    , "apellidos": persoadm[2]
-                    , "ci": persoadm[3]
-                    , "estado": persoadm[4]
+                    "id": usuario[0]
+                    , "nombre": usuario[1]
+                    , "apellido": usuario[2]
+                    , "cedula": usuario[3]
+                    , "cargo": usuario[4]
+                    , "usuario": usuario[5]
+                    , "passw": usuario[6]
                     
-                } for persoadm in lista ] if len(lista) != 0 else []
+                } for usuario in lista ] if len(lista) != 0 else []
             
         except con.Error as e:
             app.logger.error(e)
@@ -33,17 +35,17 @@ class PersoadmDao:
             cur.close()
             con.close()
     
-    def alta(self, persoadm: PersoadmDto) -> bool:
+    def alta(self, usuario: UsuarioDto) -> bool:
         insertsql = """
-        INSERT INTO public.perso_adm(nombre, apellidos, estado, ci)
-	    VALUES (%s, %s, %s, %s);
+        INSERT INTO usuario(nombre, apellido, cedula, cargo, usuario, passw)
+	    VALUES (%s, %s, %s, %s, %s, %s);
         """
         conexion = Conexion()
         con = conexion.getConexion()
         cur = con.cursor()
         
         try:
-            cur.execute(insertsql, (persoadm.nombre, persoadm.apellido, persoadm.estado, persoadm.ci,))
+            cur.execute(insertsql, (usuario.nombre, usuario.apellido, usuario.cedula, usuario.cargo, usuario.usuario, usuario.passw))
             con.commit()
             return True
         except con.Error as e:
@@ -56,5 +58,5 @@ class PersoadmDao:
     def baja(self, id) -> bool:
         pass
     
-    def modificacion(self, persoadm: PersoadmDto) -> bool:
+    def modificacion(self, usuario: UsuarioDto) -> bool:
         pass

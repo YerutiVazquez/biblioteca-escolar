@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% from 'render_elements.html' import pintar_alerta %}
+
+{% block titulo %}
+Usuarios
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="container-flat-form">
+        <div class="title-flat-form title-flat-blue">Registrar un nuevo Usuario</div>
+        <form class="form-padding" action="{{ url_for('usuario_route.usuario_guardar') }}" method="post">
+            <div class="row">
+                <div class="col-xs-12">
+                    <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>
+                </div>
+                <div class="col-xs-12">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_cedula"
+                            placeholder="Escribe aquí el numero de CI del Usuario" required="" maxlength="20"
+                            data-toggle="tooltip" data-placement="top" title="CI del usuario">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>CI</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_nombre"
+                            placeholder="Escribe aquí los nombres del usuario" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Nombres del usuario">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Nombres</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_apellido"
+                            placeholder="Escribe aquí los apellidos del usuario" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Apellidos del usuario">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Apellidos</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_cargo"
+                            placeholder="Escribe aquí el cargo del usuario" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Cargo del usuario">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Cargo</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_usuario"
+                            placeholder="Escribe aquí el cargo del usuario" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Usuario">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Usuario</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="usuario_passw"
+                            placeholder="Escribe aquí el Pass del usuario" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="pass">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Pass</label>
+                    </div>
+                </div>
+
+                                
+                
+                <div class="col-xs-12">
+                    <p class="text-center">
+                        <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i
+                                class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp;
+                            Guardar</button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{ pintar_alerta(messages) }}
+</div>
+{% endblock %}
