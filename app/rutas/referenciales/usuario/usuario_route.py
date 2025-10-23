@@ -33,7 +33,7 @@ def usuario_guardar():
     usuario = UsuarioDto(id_usuario=None, nombre=nombre, apellido=apellido,  cedula=cedula, cargo=cargo, usuario=usuario, passw=passw )
     
     # el dao
-    res = usuario_dao.alta(usuario_dao)   
+    res = usuario_dao.alta(usuario)   
     
     # en res viene true o falso
     # si vino false es que algo mambeo

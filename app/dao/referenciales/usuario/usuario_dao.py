@@ -45,7 +45,7 @@ class UsuarioDao:
         cur = con.cursor()
         
         try:
-            cur.execute(insertsql, (usuario.nombre, usuario.apellido, usuario.cedula, usuario.cargo, usuario.usuario, usuario.passw))
+            cur.execute(insertsql, (usuario.nombre, usuario.apellido, usuario.cedula, usuario.cargo, usuario.usuario, usuario.passw,))
             con.commit()
             return True
         except con.Error as e:
