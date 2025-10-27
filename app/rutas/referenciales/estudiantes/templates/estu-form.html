@@ -45,30 +45,48 @@ Estudiantes
                         <label>Apellidos</label>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-6">
                     <div class="group-material">
-                        <span>Curso</span>
-                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top" name="estu_curso"
-                            title="Elige el curso que pertenece el alumno">
-                            <option value="" disabled="" selected="">Selecciona un curso</option>
-                            {% for item in combocursos %}
-                            <option value="{{ item['id'] }}">{{ item['descripcion'] }}</option>
-                            {% else %}
-                            <option value="" disabled="" selected="">No hay registros</option>
-                            {% endfor %}
-                        </select>
+                        <input type="text" class="material-control tooltips-general" name="ci"
+                            placeholder="Escribe aquí el ci del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="CI del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>CI</label>
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-12 col-sm-6">
                     <div class="group-material">
-                        <span>Sexo</span>
-                        <select class="material-control tooltips-general" data-toggle="tooltip" data-placement="top" name="estu_sexo"
-                            title="Elige el sexo que pertenece el alumno">
-                            <option>Selecciona un sexo</option>
-                            <option value="femenino" selected="">Femenino</option>
-                            <option value="masculino" selected="">Masculino</option>
-                            <option value="otros" selected="">Otros</option>
-                        </select>
+                        <input type="text" class="material-control tooltips-general" name="telef"
+                            placeholder="Escribe aquí el telef del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Telefono del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Telef</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="curso"
+                            placeholder="Escribe aquí el curso del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Curso del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Curso</label>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="group-material">
+                        <input type="text" class="material-control tooltips-general" name="turno"
+                            placeholder="Escribe aquí el turno del alumno" required=""
+                            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" maxlength="50" data-toggle="tooltip"
+                            data-placement="top" title="Turno del estudiante">
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label>Turno</label>
                     </div>
                 </div>
                 

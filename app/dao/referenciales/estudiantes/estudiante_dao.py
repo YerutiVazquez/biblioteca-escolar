@@ -1,17 +1,14 @@
 from flask import current_app as app
 from app.conexion.conexion import Conexion
 from app.dao.referenciales.estudiantes.estudiante_dto import EstudianteDto
+from datetime import date
 
 class EstudianteDao:
     
     def leer(self):
         sql = """
-        SELECT 
-            e.id, e.nombres, e.apellidos, e.ci, e.sexo, c.descripcion 
-        FROM 
-            estudiantes as e
-        INNER JOIN 
-            cursos as c on e.id_curso = c.id
+       SELECT id_estudiantes, nombre, apellido, ci, telef, curso, turno
+	FROM public.estudiantes;
         """
         conexion = Conexion()
         con = conexion.getConexion()
@@ -22,11 +19,12 @@ class EstudianteDao:
             lista = cur.fetchall()
             return [{
                     "id": estudiante[0]
-                    , "nombres": estudiante[1]
-                    , "apellidos": estudiante[2]
+                    , "nombre": estudiante[1]
+                    , "apellido": estudiante[2]
                     , "ci": estudiante[3]
-                    , "sexo": estudiante[4]
-                    , "curso_descripcion": estudiante[5]
+                    , "telef": estudiante[4]
+                    , "curso": estudiante[5]
+                    , "turno": estudiante[6]
                 } for estudiante in lista ] if len(lista) != 0 else []
             
         except con.Error as e:
@@ -37,13 +35,8 @@ class EstudianteDao:
             
     def leerPorId(self, id):
         sql = """
-        SELECT 
-            e.id, e.nombres, e.apellidos, e.ci, e.sexo, c.descripcion, e.id_curso
-        FROM 
-            estudiantes as e
-        INNER JOIN 
-            cursos as c on e.id_curso = c.id
-        WHERE e.id = %s
+        SELECT id_estudiantes, nombre, apellido, ci, telef, curso, turno
+	FROM public.estudiantes;
         """
         conexion = Conexion()
         con = conexion.getConexion()
@@ -54,12 +47,12 @@ class EstudianteDao:
             estudiante = cur.fetchone()
             return {
                     "id": estudiante[0]
-                    , "nombres": estudiante[1]
-                    , "apellidos": estudiante[2]
+                    , "nombre": estudiante[1]
+                    , "apellido": estudiante[2]
                     , "ci": estudiante[3]
-                    , "sexo": estudiante[4]
-                    , "curso_descripcion": estudiante[5]
-                    , "id_curso": estudiante[6]
+                   , "telef": estudiante[4]
+                    , "curso": estudiante[5]
+                    , "turno": estudiante[6]
                 }
             
         except con.Error as e:
@@ -70,15 +63,15 @@ class EstudianteDao:
     
     def alta(self, estudiante: EstudianteDto) -> bool:
         insertsql = """
-        INSERT INTO public.estudiantes(nombres, apellidos, ci, sexo, id_curso)
-	    VALUES (%s, %s, %s, %s, %s);
+        INSERT INTO public.estudiantes(nombre, apellido, ci, telef, curso, turno)
+	        VALUES (?, ?, ?, ?, ?, ?);
         """
         conexion = Conexion()
         con = conexion.getConexion()
         cur = con.cursor()
         
         try:
-            cur.execute(insertsql, (estudiante.nombres, estudiante.apellidos, estudiante.ci, estudiante.sexo, estudiante.id_curso,))
+            cur.execute(insertsql, (estudiante.nombre, estudiante.apellido, estudiante.ci, estudiante.telef, estudiante.curso, estudiante.turno))
             con.commit()
             return True
         except con.Error as e:
@@ -92,4 +85,34 @@ class EstudianteDao:
         pass
     
     def modificacion(self, estudiante: EstudianteDto) -> bool:
+        """Actualiza un estudiante existente en la base de datos (UPDATE)."""
+        updatesql = """
+        UPDATE public.estudiantes
+	SET id_estudiantes=?, nombre=?, apellido=?, ci=?, telef=?, curso=?, turno=?
+	WHERE id_estudiantes=%s;
+        """
+        conexion = Conexion()
+        con = conexion.getConexion()
+        cur = con.cursor()
+        
+        try:
+            # La tupla de parámetros incluye todos los campos, y el ID al final para el WHERE
+            cur.execute(updatesql, (
+                estudiante.nombres, 
+                estudiante.apellidos, 
+                estudiante.ci, 
+                estudiante.telef, 
+                estudiante.curso,
+                estudiante.turno # Clave para la cláusula WHERE
+            ))
+            con.commit()
+            return True
+        except con.Error as e:
+            # Mantiene la estructura de manejo de errores de 'alta'
+            # app.logger.error(e)
+            print(f"ERROR en MODIFICACION: {e}") # Log de simulación
+        finally:
+            cur.close()
+            con.close()
+        return False
         pass
